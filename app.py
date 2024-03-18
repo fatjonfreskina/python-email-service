@@ -14,7 +14,7 @@ tokens_to_email[rdsrls_token] =  "fatjonfreskina@gmail.com"
 
 app = Flask(__name__)
 
-@app.route('/email-service', methods=['POST'])
+@app.route('/forward-email', methods=['POST'])
 def incoming_email():
     """Expected json format:
     {
