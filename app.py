@@ -6,11 +6,11 @@ import logging, os, sys
 
 load_dotenv()
 password = os.getenv('SMTP_PASSWORD')                   # The password for the email application
-receiver_rdsrls = os.getenv('RECEIVER_EMAIL_RDSRLS')    # The email address where you want to receive emails
-rdsrls_token = os.getenv('RDSRLS_TOKEN')                # The token for the RDSRLS email service
+receiver = 'fatjonfreskina@gmail.com'                   # The email address where you want to receive emails
+portfolio_token = os.getenv('PORTFOLIO_TOKEN')          # The token for the RDSRLS email service
 
 tokens_to_email = {}
-tokens_to_email[rdsrls_token] =  "fatjonfreskina@gmail.com"
+tokens_to_email[portfolio_token] =  "fatjonfreskina@gmail.com"
 
 app = Flask(__name__)
 
