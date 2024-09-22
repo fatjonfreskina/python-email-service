@@ -4,6 +4,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import logging
 
+logging.basicConfig(level=logging.INFO)
+
 def format_to_html(subject: str, body: str, sender:str, name: str) -> str:
     """
     Converts a plain text email body to HTML.
@@ -51,4 +53,5 @@ def send_email(to, subject, name, body, sender, smtp_password) -> bool:
         smtp_connection.quit()
         return True
     except Exception as e:
+        logging.INFO(f"Error sending email: {e}")
         return False
