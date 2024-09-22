@@ -1,13 +1,19 @@
-FROM python:3-slim-bookworm
+FROM python:3.12
 
+# Set the working directory in the container
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-RUN pip3 install -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Set environment variables
+ENV FLASK_ENV=production
 
+# Expose port 8000 to the outside world
 EXPOSE 8000
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8000"]
+# Run flask when the container launches
+CMD ["waitress-serve", "--host", "0.0.0.0", "--port", "8000", "--call", "app:create_app"]
