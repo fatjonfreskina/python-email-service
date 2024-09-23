@@ -8,16 +8,12 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 def create_app():
     app = Flask(__name__)
-    # TODO: setup envs to work with .env file
     load_dotenv()
     app.config['SMTP_PASSWORD'] =   os.getenv('SMTP_PASSWORD')      # The password for the email application
     app.config['PORTFOLIO_TOKEN'] = os.getenv('PORTFOLIO_TOKEN')    # The token for the RDSRLS email service
     app.config['RECEIVER'] =        os.getenv('RECEIVER')           # The email address where you want to receive emails
     app.config['TOKENS_TO_EMAIL'] = {}
     app.config['TOKENS_TO_EMAIL'].update({app.config['PORTFOLIO_TOKEN']: app.config['RECEIVER']})
-    
-    for key in os.environ.keys():
-        logging.info(f"Key: {key}, Value: {os.environ[key]}")
 
     @app.route('/forward-email', methods=['POST'])
     def incoming_email():
