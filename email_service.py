@@ -32,11 +32,11 @@ def send_email_unsafe(to, subject, name, body, sender) -> bool:
         smtp_connection = smtplib.SMTP(smtp_server, smtp_port)
         smtp_connection.starttls()
         smtp_connection.login(smtp_username, smtp_password)
-        smtp_connection.sendmail(from_address, to, msg.as_string())
+        smtp_connection.sendmail(smtp_username, to, msg.as_string())
         smtp_connection.quit()
         return True
     except Exception as e:
-        logging.INFO(f"Error sending email: {e}")
+        logging.info(f"Error sending email: {e}")
         return False
     
 def send_reset_password_email(to, subject, reset_link) -> bool:
@@ -67,5 +67,5 @@ def send_reset_password_email(to, subject, reset_link) -> bool:
         smtp_connection.quit()
         return True
     except Exception as e:
-        logging.INFO(f"Error sending email: {e}")
+        logging.info(f"Error sending email: {e}")
         return False

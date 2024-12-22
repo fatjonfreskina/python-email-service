@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import logging, os, sys
 from enum import Enum
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 def create_app():
     app = Flask(__name__)
@@ -47,7 +47,7 @@ def create_app():
                 'message': 'Missing data',
                 }), 400
         
-        result = send_email(
+        result = send_email_unsafe(
             to=email_to,
             subject=email_subject,
             name=name,
